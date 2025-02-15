@@ -5,8 +5,8 @@ const CreateTodoButton = () => {
         <button
             className={'CreateTodoButton'}
             type="button"
-            onClick={() => {
-                console.log('new one')
+            onClick={(e) => {
+                console.log(e.target)
             }}
         >
             ➕

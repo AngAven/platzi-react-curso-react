@@ -5,6 +5,7 @@ import {TodoSearch} from './components/TodoSearch'
 import {TodoList} from './components/TodoList'
 import {TodoItem} from "./components/TodoItem";
 import {CreateTodoButton} from './components/CreateTodoButton'
+import {useState} from "react";
 
 const defaultTodos = [
     {
@@ -26,13 +27,18 @@ const defaultTodos = [
 ]
 
 function App() {
+    const [searchValue, setSearchValue] = useState('')
+
     return (
         <div className="App">
             <TodoCounter
                 total={5}
                 completed={2}
             />
-            <TodoSearch/>
+            <TodoSearch
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+            />
             <TodoList>
                 {
                     defaultTodos.map(todo => {
