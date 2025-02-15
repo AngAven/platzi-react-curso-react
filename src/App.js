@@ -1,39 +1,32 @@
-import logo from './platzi.webp';
-
 import {TodoCounter} from './components/TodoCounter'
 import {TodoSearch} from './components/TodoSearch'
 import {TodoList} from './components/TodoList'
 import {TodoItem} from "./components/TodoItem";
 import {CreateTodoButton} from './components/CreateTodoButton'
 import {useState} from "react";
-
-const defaultTodos = [
-    {
-        text: 'buy soup',
-        completed: true,
-    },
-    {
-        text: 'throw out the trash',
-        completed: false,
-    },
-    {
-        text: 'buy sun glasses',
-        completed: true,
-    },
-    {
-        text: 'go to cinema',
-        completed: true,
-    },
-]
+import {makeTodos} from './fakes/todosFake'
 
 function App() {
     const [searchValue, setSearchValue] = useState('')
+    const [todos, setTodos] = useState(makeTodos())
+
+    const completedTodos = todos.filter(todo => !!todo.completed)
+    const numberCompletedTodos = completedTodos.length
+    const totalTodos = todos.length
+    const searchedTodos = todos.filter(todo => {
+        const todoText = todo.text.toLowerCase()
+        const searchedText = searchValue.toLowerCase()
+
+        if (todoText.includes(searchedText)) {
+            return todo
+        }
+    })
 
     return (
         <div className="App">
             <TodoCounter
-                total={5}
-                completed={2}
+                total={totalTodos}
+                completed={numberCompletedTodos}
             />
             <TodoSearch
                 searchValue={searchValue}
@@ -41,8 +34,8 @@ function App() {
             />
             <TodoList>
                 {
-                    defaultTodos.map(todo => {
-                       return  <TodoItem todo={todo.text} completed={todo.completed} key={todo.text}/>
+                    searchedTodos.map(todo => {
+                        return <TodoItem todo={todo.text} completed={todo.completed} key={todo.text}/>
                     })
                 }
             </TodoList>
