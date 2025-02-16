@@ -3,7 +3,7 @@ import {faker} from "@faker-js/faker/locale/es_MX";
 const todoFake = () => ({
     text: faker.lorem.sentence({min: 1, max: 5}),
     completed: faker.datatype.boolean(),
-    date: faker.date.recent({days: 10})
+    date: faker.date.month(),
 })
 
 const makeTodos = (size = 5) => {
