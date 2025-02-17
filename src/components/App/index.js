@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import {useLocalStorage} from "../../customHooks/useLocalStorage"
 import {makeTodos} from '../../fakes/todosFake'
 import './App.css'
@@ -6,7 +6,7 @@ import {AppUi} from "./AppUI";
 
 function App() {
     const [searchValue, setSearchValue] = useState('')
-    const [todos, setTodos] = useLocalStorage('TODOS_V1', makeTodos(10))
+    const {item: todos, saveItem: setTodos, loading, error} = useLocalStorage('TODOS_V1', [])
     const completedTodos = todos.filter(todo => !!todo.completed)
     const numberCompletedTodos = completedTodos.length
     const totalTodos = todos.length
@@ -42,6 +42,8 @@ function App() {
             completeTodo={completeTodo}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
+            loading={loading}
+            error={error}
         />
     );
 }

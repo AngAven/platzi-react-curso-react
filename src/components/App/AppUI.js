@@ -12,8 +12,10 @@ const AppUi = ({
                    deleteTodo,
                    completeTodo,
                    searchValue,
-                   setSearchValue
-}) => {
+                   setSearchValue,
+                   loading,
+                   error,
+               }) => {
     return (
         <div className="App">
             <TodoCounter
@@ -24,6 +26,13 @@ const AppUi = ({
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
             />
+            {loading && <p>Loading...</p>}
+            {error && <p>Error...</p>}
+            {(!loading && searchedTodos.length === 0)
+                &&
+                <p>Crea tu primer ToDo</p>
+            }
+
             <TodoList>
                 {
                     searchedTodos.map(todo => {
