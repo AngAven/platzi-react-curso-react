@@ -1,14 +1,15 @@
+import {useState} from "react";
 import {TodoCounter} from './components/TodoCounter'
 import {TodoSearch} from './components/TodoSearch'
 import {TodoList} from './components/TodoList'
 import {TodoItem} from "./components/TodoItem";
 import {CreateTodoButton} from './components/CreateTodoButton'
-import {useState} from "react";
 import {makeTodos} from './fakes/todosFake'
+import './App.css'
 
 function App() {
     const [searchValue, setSearchValue] = useState('')
-    const [todos, setTodos] = useState(makeTodos())
+    const [todos, setTodos] = useState(makeTodos(10))
 
     const completedTodos = todos.filter(todo => !!todo.completed)
     const numberCompletedTodos = completedTodos.length
@@ -20,6 +21,8 @@ function App() {
         if (todoText.includes(searchedText)) {
             return todo
         }
+
+        return 0
     })
 
     const deleteTodo = (todoText) => {
@@ -52,7 +55,7 @@ function App() {
                             onDeleteTodo={deleteTodo}
                             todoText={todo.text}
                             completed={todo.completed}
-                            key={todo.text}
+                            key={todo.uuid}
                             date={todo.date}
                         />
                     })

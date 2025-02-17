@@ -1,4 +1,3 @@
-import {useState} from "react";
 import './TodoSearch.css'
 
 const TodoSearch = ({searchValue, setSearchValue}) => {

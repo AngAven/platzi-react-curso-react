@@ -1,6 +1,7 @@
 import {faker} from "@faker-js/faker/locale/es_MX";
 
 const todoFake = () => ({
+    uuid: faker.string.uuid(),
     text: faker.lorem.sentence({min: 1, max: 5}),
     completed: faker.datatype.boolean(),
     date: faker.date.month(),

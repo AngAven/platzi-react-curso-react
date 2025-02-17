@@ -1,21 +1,35 @@
+import {MdOutlineDoneAll} from "react-icons/md";
+import {RxCrossCircled} from "react-icons/rx";
 import './TodoItem.css'
 
-const TodoItem = ({todoText, completed, date, onDeleteTodo, onCompleteTodo}) => {
+const TodoItem = ({todoText, completed, onDeleteTodo, onCompleteTodo}) => {
+    const iconTypes = {
+        'check':
+            <MdOutlineDoneAll
+                onClick={() => onCompleteTodo(todoText)}
+                className={"Icon Icon-check Icon-check--active"}
+            />,
+        'uncheck':
+            <MdOutlineDoneAll
+                onClick={() => onCompleteTodo(todoText)}
+                className={"Icon Icon-check"}
+            />,
+        'delete':
+            <RxCrossCircled
+                onClick={() => onDeleteTodo(todoText)}
+                className="Icon Icon-delete"
+            />,
+    }
+
     return (
         <>
             <li className="TodoItem">
-                <span
-                    onClick={() => onCompleteTodo(todoText)}
-                    className={`Icon Icon-check ${completed && "Icon-check--active"}`}
-                >V</span>
-                <p className={`TodoItem-p ${completed && "TodoItem-p--complete"}`}>
+                {completed ? iconTypes.check : iconTypes.uncheck}
+                <p
+                    className={`TodoItem-p ${completed && "TodoItem-p--complete"}`}>
                     {todoText}
                 </p>
-                {/*<em className="TodoItem-em">{date}</em>*/}
-                <span
-                    onClick={() => onDeleteTodo(todoText)}
-                    className="Icon Icon-delete"
-                >X</span>
+                {iconTypes.delete}
             </li>
         </>
     )
