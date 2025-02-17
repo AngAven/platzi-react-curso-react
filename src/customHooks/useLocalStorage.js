@@ -23,7 +23,7 @@ const useLocalStorage = (itemName, initialValue) => {
                 setError(true)
                 setLoading(false)
             }
-        }, 500)
+        }, 1000)
     }, [initialValue, itemName]);
 
     const saveItem = (newItem) => {
