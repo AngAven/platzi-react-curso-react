@@ -7,6 +7,7 @@ import {CreateTodoButton} from "../CreateTodoButton";
 import {TodosError} from "../TodosError/TodosError";
 import {TodosLoading} from "../TodosLoading";
 import {EmptyTodos} from "../EmptyTodos";
+import {Modal} from "../../Modal";
 import {TodoContext} from "../TodoContext";
 
 const AppUi = () => {
@@ -16,6 +17,8 @@ const AppUi = () => {
         completeTodo,
         loading,
         error,
+        openModal,
+        setOpenModal,
     } = useContext(TodoContext)
     return (
         <div className="App">
@@ -43,7 +46,21 @@ const AppUi = () => {
                 }
             </TodoList>
 
-            <CreateTodoButton/>
+            <CreateTodoButton
+                setOpenModal={setOpenModal}
+            />
+
+            {
+                openModal && (
+                    <Modal>
+                        <p>
+                            Add Todo's
+                        </p>
+                        {/*<TodoCounter/>*/}
+                    </Modal>
+
+                )
+            }
         </div>
     );
 };

@@ -1,13 +1,11 @@
 import './CreateTodoButton.css'
 
-const CreateTodoButton = () => {
+const CreateTodoButton = ({setOpenModal}) => {
     return (
         <button
             className={'CreateTodoButton'}
             type="button"
-            onClick={(e) => {
-                console.log(e.target)
-            }}
+            onClick={() => setOpenModal(state => !state)}
         >
             ➕
         </button>
