@@ -4,21 +4,13 @@ import {TodoSearch} from './components/TodoSearch'
 import {TodoList} from './components/TodoList'
 import {TodoItem} from "./components/TodoItem";
 import {CreateTodoButton} from './components/CreateTodoButton'
+import {useLocalStorage} from "./customHooks/useLocalStorage";
 import {makeTodos} from './fakes/todosFake'
 import './App.css'
 
 function App() {
-    let localStorageTodos = localStorage.getItem('TODOS_V1')
-
-    if (!localStorageTodos) {
-        localStorage.setItem('TODOS_V1', JSON.stringify(makeTodos(10)))
-    } else {
-        localStorageTodos = JSON.parse(localStorageTodos)
-    }
-
     const [searchValue, setSearchValue] = useState('')
-    const [todos, setTodos] = useState(localStorageTodos)
-
+    const [todos, setTodos] = useLocalStorage('TODOS_V1', makeTodos(10))
     const completedTodos = todos.filter(todo => !!todo.completed)
     const numberCompletedTodos = completedTodos.length
     const totalTodos = todos.length
@@ -35,19 +27,14 @@ function App() {
 
     const deleteTodo = (todoText) => {
         const newTodos = todos.filter(todo => todo.text !== todoText)
-        saveTodos([...newTodos])
+        setTodos([...newTodos])
     }
 
     const completeTodo = (todoText) => {
         const newTodos = todos
         const todoIndex = todos.findIndex(todo => todo.text === todoText)
         newTodos[todoIndex].completed = true
-        saveTodos([...newTodos])
-    }
-
-    const saveTodos = (todos) => {
-        localStorage.setItem('TODOS_V1', JSON.stringify(todos))
-        setTodos(todos)
+        setTodos([...newTodos])
     }
 
     return (
