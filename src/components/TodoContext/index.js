@@ -1,10 +1,17 @@
 import React, {useState} from 'react';
 import {useLocalStorage} from "../../customHooks/useLocalStorage";
+import {faker} from "@faker-js/faker/locale/es_MX";
+
 const TodoContext = React.createContext()
 
 const TodoProvider = ({children}) => {
     const [searchValue, setSearchValue] = useState('')
-    const {item: todos, saveItem: setTodos, loading, error} = useLocalStorage('TODOS_V1', [])
+    const {
+        item: todos,
+        saveItem: setTodos,
+        loading,
+        error,
+    } = useLocalStorage('TODOS_V1', [])
     const [openModal, setOpenModal] = useState(false)
     const completedTodos = todos.filter(todo => !!todo.completed)
     const numberCompletedTodos = completedTodos.length
@@ -26,10 +33,21 @@ const TodoProvider = ({children}) => {
     }
 
     const completeTodo = (todoText) => {
-        const newTodos = todos
+        const newTodos = [...todos]
         const todoIndex = todos.findIndex(todo => todo.text === todoText)
         newTodos[todoIndex].completed = true
         setTodos([...newTodos])
+    }
+
+    const addTodo = (text) => {
+        const newTodos = [...todos]
+        const item = {
+            uuid: faker.string.uuid(),
+            text: text,
+            completed: false,
+        }
+        newTodos.push(item)
+        setTodos(newTodos)
     }
 
     return (
@@ -45,6 +63,7 @@ const TodoProvider = ({children}) => {
             error,
             openModal,
             setOpenModal,
+            addTodo,
         }}>
             {children}
         </TodoContext.Provider>

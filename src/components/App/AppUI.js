@@ -9,6 +9,7 @@ import {TodosLoading} from "../TodosLoading";
 import {EmptyTodos} from "../EmptyTodos";
 import {Modal} from "../../Modal";
 import {TodoContext} from "../TodoContext";
+import {TodoForm} from "../TodoForm";
 
 const AppUi = () => {
     const {
@@ -53,10 +54,7 @@ const AppUi = () => {
             {
                 openModal && (
                     <Modal>
-                        <p>
-                            Add Todo's
-                        </p>
-                        {/*<TodoCounter/>*/}
+                        <TodoForm/>
                     </Modal>
 
                 )
