@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import {makeTodos} from "../fakes/todosFake";
 
 const useLocalStorage = (itemName, initialValue) => {
     const [item, setItem] = useState(initialValue)
