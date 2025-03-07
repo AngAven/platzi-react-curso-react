@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useLocalStorage} from "../../customHooks/useLocalStorage";
+import {useLocalStorage} from "../customHooks/useLocalStorage";
 import {faker} from "@faker-js/faker/locale/es_MX";
 
 const TodoContext = React.createContext()

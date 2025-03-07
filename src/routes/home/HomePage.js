@@ -1,17 +1,17 @@
 import React, {useContext} from 'react';
-import {TodoCounter} from "../TodoCounter";
-import {TodoSearch} from "../TodoSearch";
-import {TodoList} from "../TodoList";
-import {TodoItem} from "../TodoItem";
-import {CreateTodoButton} from "../CreateTodoButton";
-import {TodosError} from "../TodosError/TodosError";
-import {TodosLoading} from "../TodosLoading";
-import {EmptyTodos} from "../EmptyTodos";
-import {Modal} from "../../Modal";
+import {TodoCounter} from "../../ui/TodoCounter";
+import {TodoSearch} from "../../ui/TodoSearch";
+import {TodoList} from "../../ui/TodoList";
+import {TodoItem} from "../../ui/TodoItem";
+import {CreateTodoButton} from "../../ui/CreateTodoButton";
+import {TodosError} from "../../ui/TodosError/TodosError";
+import {TodosLoading} from "../../ui/TodosLoading";
+import {EmptyTodos} from "../../ui/EmptyTodos";
+import {Index} from "../../ui/Modal";
 import {TodoContext} from "../TodoContext";
-import {TodoForm} from "../TodoForm";
+import {TodoForm} from "../../ui/TodoForm";
 
-const AppUi = () => {
+const HomePage = () => {
     const {
         searchedTodos,
         deleteTodo,
@@ -53,9 +53,9 @@ const AppUi = () => {
 
             {
                 openModal && (
-                    <Modal>
+                    <Index>
                         <TodoForm/>
-                    </Modal>
+                    </Index>
 
                 )
             }
@@ -63,4 +63,4 @@ const AppUi = () => {
     );
 };
 
-export {AppUi};
+export {HomePage};
