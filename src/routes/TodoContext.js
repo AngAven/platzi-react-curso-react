@@ -27,16 +27,22 @@ const TodoProvider = ({children}) => {
         return 0
     })
 
-    const deleteTodo = (todoText) => {
-        const newTodos = todos.filter(todo => todo.text !== todoText)
+    const deleteTodo = (uuid) => {
+        const newTodos = todos.filter(todo => todo.uuid !== uuid)
         setTodos([...newTodos])
     }
 
-    const completeTodo = (todoText) => {
+    const completeTodo = (uuid) => {
         const newTodos = [...todos]
-        const todoIndex = todos.findIndex(todo => todo.text === todoText)
-        newTodos[todoIndex].completed = true
-        setTodos([...newTodos])
+        const todoIndex = todos.findIndex(todo => todo.uuid === uuid)
+
+        if (newTodos[todoIndex].completed) {
+            newTodos[todoIndex].completed = false
+            setTodos([...newTodos])
+        } else {
+            newTodos[todoIndex].completed = true
+            setTodos([...newTodos])
+        }
     }
 
     const addTodo = (text) => {
@@ -48,6 +54,11 @@ const TodoProvider = ({children}) => {
         }
         newTodos.push(item)
         setTodos(newTodos)
+    }
+
+    const editTodo = (uuid) => {
+        const editTodo = todos.find(todo => todo.uuid === uuid)
+        console.log(editTodo)
     }
 
     return (
@@ -64,6 +75,7 @@ const TodoProvider = ({children}) => {
             openModal,
             setOpenModal,
             addTodo,
+            editTodo,
         }}>
             {children}
         </TodoContext.Provider>

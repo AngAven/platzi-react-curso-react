@@ -16,6 +16,7 @@ const HomePage = () => {
         searchedTodos,
         deleteTodo,
         completeTodo,
+        editTodo,
         loading,
         error,
         openModal,
@@ -38,9 +39,11 @@ const HomePage = () => {
                         return <TodoItem
                             onCompleteTodo={completeTodo}
                             onDeleteTodo={deleteTodo}
+                            onEditTodo={editTodo}
                             todoText={todo.text}
                             completed={todo.completed}
                             key={todo.uuid}
+                            uuid={todo.uuid}
                             date={todo.date}
                         />
                     })

@@ -6,7 +6,10 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --radius-xl: 0.75rem;
+    --color-red-50: oklch(0.971 0.013 17.38);
+    --color-red-600: oklch(0.577 0.245 27.325);
+    --spacing: 0.25rem;
+    --font-weight-medium: 500;
     --radius-2xl: 1rem;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -226,6 +229,15 @@
   .table {
     display: table;
   }
+  .h-2 {
+    height: calc(var(--spacing) * 2);
+  }
+  .h-10 {
+    height: calc(var(--spacing) * 10);
+  }
+  .h-20 {
+    height: calc(var(--spacing) * 20);
+  }
   .flex-shrink {
     flex-shrink: 1;
   }
@@ -253,12 +265,26 @@
   .rounded-2xl {
     border-radius: var(--radius-2xl);
   }
-  .rounded-xl {
-    border-radius: var(--radius-xl);
-  }
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
+  }
+  .border-none {
+    --tw-border-style: none;
+    border-style: none;
+  }
+  .font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+  .text-\[\#98D2C0\] {
+    color: #98D2C0;
+  }
+  .text-red-50 {
+    color: var(--color-red-50);
+  }
+  .text-red-600 {
+    color: var(--color-red-600);
   }
   .capitalize {
     text-transform: capitalize;
@@ -303,6 +329,25 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
+  .placeholder\:items-center {
+    &::placeholder {
+      align-items: center;
+    }
+  }
+  .placeholder\:px-10 {
+    &::placeholder {
+      padding-inline: calc(var(--spacing) * 10);
+    }
+  }
+  .placeholder\:px-20 {
+    &::placeholder {
+      padding-inline: calc(var(--spacing) * 20);
+    }
+  }
+}
+body {
+  background-color: #205781;
+  color: #F6F8D5;
 }
 @property --tw-rotate-x {
   syntax: "*";
@@ -333,6 +378,10 @@
   syntax: "*";
   inherits: false;
   initial-value: solid;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
 }
 @property --tw-ordinal {
   syntax: "*";
