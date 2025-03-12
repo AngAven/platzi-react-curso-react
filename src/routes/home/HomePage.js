@@ -17,14 +17,9 @@ const HomePage = () => {
         completeTodo,
         loading,
         error,
-
     } = useContext(TodoContext)
     const navigate = useNavigate()
     const uuid = useParams()
-
-    const onEditTodo = (uuid) => {
-        navigate(`/edit/${uuid}`)
-    }
 
     return (
         <div className="App">
@@ -43,7 +38,14 @@ const HomePage = () => {
                         return <TodoItem
                             onCompleteTodo={completeTodo}
                             onDeleteTodo={deleteTodo}
-                            onEditTodo={onEditTodo}
+                            onEditTodo={() => {
+                                navigate(
+                                    `/edit/${todo.uuid}`,
+                                    {
+                                        state: todo
+                                    }
+                                )
+                            }}
                             todoText={todo.text}
                             completed={todo.completed}
                             key={todo.uuid}

@@ -3,7 +3,7 @@ import {TodoContext} from "../../routes/TodoContext";
 import {useNavigate} from "react-router-dom";
 import './TodoForm.css'
 
-const TodoForm = ({uuid, todoTitle, todoAction}) => {
+const TodoForm = ({uuid, todoTitle, todoAction, defaultTodo}) => {
     const {
         addTodo,
         updateTodo,
@@ -19,7 +19,16 @@ const TodoForm = ({uuid, todoTitle, todoAction}) => {
             setNewTodoValue(editableTodo?.text)
             setIsEditable(true)
         }
-    }, [editableTodo, uuid]);
+
+        if (!newTodoValue) {
+            console.log('!defaultTodo?.text',  )
+            if (!defaultTodo?.text) {
+                console.log('nada existe')
+            }
+            setNewTodoValue(defaultTodo.text)
+        }
+
+    }, [editableTodo, uuid])
 
     const onSubmit = (e) => {
         e.preventDefault()
