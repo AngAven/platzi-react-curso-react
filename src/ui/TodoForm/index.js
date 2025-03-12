@@ -1,24 +1,39 @@
-import React, {useContext, useState} from 'react';
-import './TodoForm.css'
+import React, {useContext, useEffect, useState} from 'react';
 import {TodoContext} from "../../routes/TodoContext";
+import {useNavigate} from "react-router-dom";
+import './TodoForm.css'
 
-const TodoForm = () => {
+const TodoForm = ({uuid, todoTitle, todoAction}) => {
     const {
-        setOpenModal,
         addTodo,
+        updateTodo,
+        todos,
     } = useContext(TodoContext)
-
+    const navigate = useNavigate()
     const [newTodoValue, setNewTodoValue] = useState('')
+    const [editableTodo, setEditableTodo] = useState(() => todos?.find(todo => todo.uuid === uuid))
+    const [isEditable, setIsEditable] = useState(false)
 
+    useEffect(() => {
+        if (editableTodo) {
+            setNewTodoValue(editableTodo?.text)
+            setIsEditable(true)
+        }
+    }, [editableTodo, uuid]);
 
     const onSubmit = (e) => {
         e.preventDefault()
-        addTodo(newTodoValue)
-        setOpenModal(false);
+        if (isEditable) {
+            updateTodo(uuid, newTodoValue)
+            navigate('/')
+        } else {
+            addTodo(newTodoValue)
+            navigate('/')
+        }
     }
 
     const onCancel = () => {
-        setOpenModal(false);
+        navigate('/')
     }
 
     const onChange = (e) => {
@@ -28,11 +43,12 @@ const TodoForm = () => {
 
     return (
         <form onSubmit={onSubmit}>
-            <label htmlFor="">Write new ToDo</label>
+            <label htmlFor="todoText">{todoTitle}</label>
             <textarea
+                name={'todoText'}
                 value={newTodoValue}
                 onChange={e => onChange(e)}
-                placeholder={'Do homework'}
+                placeholder={'Buy threader tickets'}
             />
 
             <div className="Todo-Form-buttonContainer">
@@ -44,10 +60,10 @@ const TodoForm = () => {
                 </button>
 
                 <button
-                    onClick={e => onSubmit(e)}
                     type='submit'
+                    onClick={e => onSubmit(e)}
                     className='TodoForm-button TodoForm-button--add'
-                >Add
+                >{todoAction}
                 </button>
             </div>
         </form>

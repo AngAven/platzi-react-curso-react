@@ -18,7 +18,7 @@ const TodoItem = ({uuid, todoText, completed, onDeleteTodo, onCompleteTodo, onEd
             />,
         'delete':
             <RxCrossCircled
-                onClick={() => onDeleteTodo(todoText)}
+                onClick={() => onDeleteTodo(uuid)}
                 className="Icon Icon-delete"
             />,
         'edit':

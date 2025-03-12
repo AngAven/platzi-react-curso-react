@@ -7,21 +7,25 @@ import {CreateTodoButton} from "../../ui/CreateTodoButton";
 import {TodosError} from "../../ui/TodosError/TodosError";
 import {TodosLoading} from "../../ui/TodosLoading";
 import {EmptyTodos} from "../../ui/EmptyTodos";
-import {Index} from "../../ui/Modal";
 import {TodoContext} from "../TodoContext";
-import {TodoForm} from "../../ui/TodoForm";
+import {useNavigate, useParams} from "react-router-dom";
 
 const HomePage = () => {
     const {
         searchedTodos,
         deleteTodo,
         completeTodo,
-        editTodo,
         loading,
         error,
-        openModal,
-        setOpenModal,
+
     } = useContext(TodoContext)
+    const navigate = useNavigate()
+    const uuid = useParams()
+
+    const onEditTodo = (uuid) => {
+        navigate(`/edit/${uuid}`)
+    }
+
     return (
         <div className="App">
             <TodoCounter/>
@@ -39,7 +43,7 @@ const HomePage = () => {
                         return <TodoItem
                             onCompleteTodo={completeTodo}
                             onDeleteTodo={deleteTodo}
-                            onEditTodo={editTodo}
+                            onEditTodo={onEditTodo}
                             todoText={todo.text}
                             completed={todo.completed}
                             key={todo.uuid}
@@ -51,17 +55,8 @@ const HomePage = () => {
             </TodoList>
 
             <CreateTodoButton
-                setOpenModal={setOpenModal}
+                onClick={()=> navigate('/new')}
             />
-
-            {
-                openModal && (
-                    <Index>
-                        <TodoForm/>
-                    </Index>
-
-                )
-            }
         </div>
     );
 };

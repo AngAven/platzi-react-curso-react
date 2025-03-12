@@ -14,6 +14,7 @@ const TodoSearch = () => {
             type="text"
             placeholder="Buy apples"
             value={searchValue}
+            id={'search'}
         />
     )
 }
